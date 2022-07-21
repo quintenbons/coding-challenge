@@ -1,0 +1,6 @@
+[workspace]
+members = [
+  "raycasting-2D",
+]
+
+resolver = "2"

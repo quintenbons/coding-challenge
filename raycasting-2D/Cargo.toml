@@ -1,0 +1,8 @@
+[package]
+name = "raycasting-2D"
+version = "0.1.0"
+authors = ["quintenbons <quintenbons@outlook.com>"]
+edition = "2021"
+
+[dependencies]
+nannou = "0.18.1"
