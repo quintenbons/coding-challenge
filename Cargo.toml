@@ -2,6 +2,7 @@
 members = [
   "raycasting-2D",
   "prime-polars",
+  "prime-spiral",
 ]
 
 resolver = "2"

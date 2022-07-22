@@ -15,3 +15,8 @@ Simple 2D raycasting
 
 Plot `(n, n)` in polar coordinates. The prime part is irrelevant, but helps making the plot less dense
 ![image](./docs/showcase/prime-polars.png)
+
+- [Prime spiral](./prime-spiral/)
+
+Popular prime spiral counting from 0 in the center
+![image](./docs/showcase/prime-spiral.png)
