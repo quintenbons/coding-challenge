@@ -10,7 +10,7 @@ use nannou::winit::event;
 use primes::PrimeSet;
 
 const DEFAULT_SCALE: f32 = 1.;
-const BACKGROUND_COLOR: Rgb<u8> = DARKBLUE;
+const BACKGROUND_COLOR: Rgb<u8> = BLACK;
 const POINT_RADIUS: f32 = 2.;
 const POINT_COLOR: Rgb<u8> = WHITE;
 

@@ -10,3 +10,8 @@ In order  to try the implementations by yourself, you will have to prepare your 
 
 Simple 2D raycasting
 ![image](./docs/showcase/raycasting-2D.png)
+
+- [Prime polars](./prime-polars/)
+
+Plot `(n, n)` in polar coordinates. The prime part is irrelevant, but helps making the plot less dense
+![image](./docs/showcase/prime-polars.png)
