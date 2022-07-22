@@ -1,6 +1,7 @@
 [workspace]
 members = [
   "raycasting-2D",
+  "prime-polars",
 ]
 
 resolver = "2"
