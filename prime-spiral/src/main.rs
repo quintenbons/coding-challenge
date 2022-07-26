@@ -1,7 +1,4 @@
-/// Prime spiral playing with polar coordinates
-/// Note that selecting only the "prime" numbers
-/// Is somewhat irrelevant, it just makes the
-/// drawing less dense
+/// Prime spiral showing non-random patterns
 mod handler;
 
 use handler::*;
