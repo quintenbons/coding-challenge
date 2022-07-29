@@ -1,0 +1,9 @@
+[package]
+name = "pathfinding"
+version = "0.1.0"
+authors = ["quintenbons <quintenbons@outlook.com>"]
+edition = "2021"
+
+[dependencies]
+nannou = "0.18.1"
+once_cell = "1.8.0"
