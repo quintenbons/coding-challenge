@@ -4,6 +4,7 @@ members = [
   "prime-polars",
   "prime-spiral",
   "pathfinding",
+  "penguin-spiral",
 ]
 
 resolver = "2"
