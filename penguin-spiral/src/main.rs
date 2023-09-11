@@ -6,12 +6,21 @@ use penguin_math::Model;
 use nannou::{prelude::*, winit::event::DeviceEvent, event::ElementState};
 
 const DEFAULT_PENGUIN_NB: u32 = 10;
-const DEFAULT_SPEED: f32 = 5.;
-const DEFAULT_RADIUS: f32 = 200.;
+const DEFAULT_SPEED: f32 = 100.;
+const DEFAULT_RADIUS: f32 = 400.;
 
 const PENGUIN_SIZE: f32 = 15.;
 const TRACE_WEIGHT: f32 = 2.;
 const BACKGROUND_COLOR: Rgb<u8> = BLACK;
+
+const COLORS: [Rgb<u8>; 6] = [
+    RED,
+    GREEN,
+    BLUE,
+    YELLOW,
+    MAGENTA,
+    CYAN,
+];
 
 fn main() {
     nannou::app(model).simple_window(view).update(update).event(event).run();
@@ -52,21 +61,32 @@ fn view(app: &App, model: &Model, frame: Frame) {
     // Background
     draw.background().color(BACKGROUND_COLOR);
 
-    for (penguin, trace) in model.positions().iter().zip(model.trace().iter()) {
-        // penguin
-        draw.ellipse()
-            .color(RED)
-            .w_h(PENGUIN_SIZE, PENGUIN_SIZE)
-            .xy(penguin.clone());
+    let pos_iter = model.positions().iter();
+    let trace_iter = model.trace().iter();
+    let col_iter = COLORS.iter().cycle();
+
+    for ((penguin, trace), col) in pos_iter.zip(trace_iter).zip(col_iter) {
+        let real_col = Rgba::new(col.red, col.green, col.blue, 50);
 
         // trace
-        // for (cur, next) in Itertools::tuple_windows(trace.iter()) {
-        //     draw.line()
-        //         .color(RED)
-        //         .weight(TRACE_WEIGHT)
-        //         .start(cur.clone())
-        //         .end(next.clone());
-        // }
+        for (cur, next) in Itertools::tuple_windows(trace.iter()) {
+            draw.line()
+                .color(real_col)
+                .weight(TRACE_WEIGHT)
+                .start(cur.clone())
+                .end(next.clone())
+                .z(1.);
+        }
+
+        // penguin
+        draw.ellipse()
+            .color(real_col)
+            .w_h(PENGUIN_SIZE, PENGUIN_SIZE)
+            .xy(penguin.clone())
+            .z(2.);
+    }
+    for t in model.trace() {
+        assert_eq!(t.len(), model.trace().first().unwrap().len())
     }
 
     // Write to the window frame

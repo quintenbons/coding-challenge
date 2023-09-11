@@ -11,7 +11,7 @@ fn move_peng(src: &mut Vec2, dst: Vec2, speed: f32) {
         let unit = relative.normalize();
         *src += unit * speed;
     } else {
-        *src = dst;
+        *src += 0.5 * relative;
     }
 }
 
@@ -26,17 +26,19 @@ pub struct Model {
 impl Model {
     pub fn new(penguin_nb: u32, speed: f32, radius: f32) -> Model {
         let mut corners = Vec::new();
+        let mut traces = Vec::new();
 
         for i in 0..penguin_nb {
             let angle = 2.0 * PI * (i as f32) / (penguin_nb as f32);
             let x = radius * angle.cos();
             let y = radius * angle.sin();
             corners.push(Point2::new(x, y));
+            traces.push(vec![Point2::new(x, y)])
         }
 
         Model {
             speed,
-            trace: Vec::new(),
+            trace: traces,
             penguin_positions: corners.clone(),
             polygon_corners: corners,
             last_tick: Instant::now(),
@@ -46,10 +48,6 @@ impl Model {
     pub fn step(&mut self) {
         let mut next_last = self.penguin_positions.last().unwrap().clone();
 
-        for (trace, cur) in self.trace.iter_mut().zip(self.penguin_positions.iter()) {
-            trace.push(cur.clone());
-        }
-
         move_peng(&mut next_last, self.penguin_positions[0], self.speed);
         for i in 0..(self.penguin_positions.len() - 1) {
             let next = self.penguin_positions[i+1];
@@ -58,6 +56,10 @@ impl Model {
         }
 
         *self.penguin_positions.last_mut().unwrap() = next_last;
+
+        for (trace, cur) in self.trace.iter_mut().zip(self.penguin_positions.iter()) {
+            trace.push(cur.clone());
+        }
     }
 
     pub fn tick(&mut self) {
